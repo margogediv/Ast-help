@@ -14,9 +14,9 @@
             </a>
           </li>
           <li class="nav-iteam">
-            <a href="#">
+            <div @click="showModalIteam" style="cursor: pointer">
               <img src="/images/content/error.svg" alt="error">
-            </a>
+            </div>
           </li>
           <div class="user">
             <button class="btn">
@@ -27,16 +27,32 @@
         </ul>
       </div>
     </div>
+    <modalIteam v-if="modalIteamVisible" @closeModal="closeModaliteam" titleModal="Текущие сообщения"></modalIteam>
   </div>
 </template>
 
 <script>
+
+import modalIteam from "../components/modalIteam"
+
 export default {
   name: "Header",
+  components: {
+    modalIteam: modalIteam,
+  },
+
   data() {
     return {
-
+      modalIteamVisible: false,
     }
+  },
+  methods: {
+    showModalIteam() {
+      this.modalIteamVisible = true;
+    },
+    closeModaliteam() {
+      this.modalIteamVisible = false;
+    },
   }
 }
 </script>
