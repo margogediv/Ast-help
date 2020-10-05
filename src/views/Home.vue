@@ -182,7 +182,7 @@
         </template>
       </div>
     </footer>
-    <modalIteam v-if="modalIteamVisible" @closeModal="closeModaliteam"></modalIteam>
+    <modalIteam v-if="modalIteamVisible" @closeModal="closeModaliteam" titleModal="Фильтр"></modalIteam>
   </div>
 </template>
 
