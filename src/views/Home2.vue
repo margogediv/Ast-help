@@ -1,34 +1,6 @@
 <template>
   <div>
-    <header class="header">
-      <div class="container">
-        <div class="header-box">
-          <div class="logo">
-            <a href="#">
-              <img class="logo-img" src="/images/content/logo.svg" alt="logo">
-            </a>
-          </div>
-          <ul class="nav">
-            <li class="nav-iteam">
-              <a href="#">
-                <img src="/images/content/settings.svg" alt="settings">
-              </a>
-            </li>
-            <li class="nav-iteam">
-              <a href="#">
-                <img src="/images/content/error.svg" alt="error">
-              </a>
-            </li>
-            <div class="user">
-              <button class="btn">
-                <img src="/images/content/user.svg" alt="user">
-                <span class="title">Иван</span>
-              </button>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </header>
+   <Header />
     <div class="content-block">
 
       <section class="menu-nav">
@@ -170,20 +142,7 @@
       </section>
     </div>
 
-    <footer id="footer" class="footer-mdl" :class="{ open: footer.isOpen }">
-      <div @click="showFooter()" id="title-table-device" class="footer-title">
-        <p>{{ footer.title }}</p>
-      </div>
-      <div id="table-device" class="footer-mdl-iteam" v-show="footer.isOpen">
-        <template v-for="device in devicesData">
-          <div class="data-device" :data-status-code="device.status_code" :key="device.id">
-            <div class="data-box">{{ device.name }}</div>
-            <div class="data-box">{{ device.ip }}</div>
-            <div class="data-box">{{ device.status }}</div>
-          </div>
-        </template>
-      </div>
-    </footer>
+    <Footer />
     <modalIteam v-if="modalIteamVisible" @closeModal="closeModaliteam" titleModal="Фильтр"></modalIteam>
   </div>
 </template>
@@ -194,6 +153,8 @@ import CartStatic from './../components/CartStatic'
 import CartDinamic from "./../components/CartDinamic"
 import CartTime from "../components/CartTime"
 import modalIteam from "../components/modalIteam"
+import Header from "../components/header"
+import Footer from "../components/Footer"
 
 export default {
 
@@ -202,16 +163,14 @@ export default {
     CartStatic: CartStatic,
     CartDinamic: CartDinamic,
     CartTime: CartTime,
-    modalIteam: modalIteam
+    modalIteam: modalIteam,
+    Header: Header,
+    Footer: Footer,
   },
 
   data() {
     return {
-      footer: {
-        title: "Все устройства в сети",
-        isOpen: false,
-      },
-      devices: [],
+
       dataMachine: [],
       keyCartStatic: 0,
       dataCartStatic: [],
@@ -274,32 +233,6 @@ export default {
       this.table.timeWork = data['Общее_время'];
     },
 
-    showFooter() {
-      this.footer.isOpen = !this.footer.isOpen;
-      this.setTitleFooter();
-
-    },
-    setTitleFooter() {
-      let count = this.devices.length;
-      let count_active = this.devices.filter(device => device.status_code === 1).length;
-      if (this.footer.isOpen)
-        this.footer.title = count_active + " из " + count + " устройств в сети";
-      else
-        this.footer.title = "Все устройства в сети";
-    },
-    getDataFooter() {
-      axios({
-        method: 'get',
-        url: 'http://185.6.25.155/api/ConectionsInLine/1/',
-      })
-          .then(response => {
-            this.devices = response.data;
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-
-    },
     getDataMachine(filter) {
       let url = 'http://185.6.25.155/api/oee/1/one/';
       if(filter)
@@ -338,17 +271,8 @@ export default {
 
   },
   mounted() {
-    this.getDataFooter();
     this.getDataMachine();
   },
-  computed: {
-    devicesData: function () {
-      this.setTitleFooter();
-      return this.devices;
-    }
-  },
-
-
 }
 </script>
 
