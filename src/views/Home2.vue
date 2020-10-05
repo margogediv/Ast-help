@@ -39,14 +39,14 @@
                 <li><a href="#">Меню</a></li>
                 <li><a href="#">ОЕЕ</a></li>
                 <li><a href="#">Онлайн ОЕЕ</a></li>
-                <li><a href="#">Станок 1</a></li>
+                <li><a href="#">Станок 2</a></li>
               </ul>
             </div>
             <div class="menu-nav-btn">
-              <img class="arrow-back" src="/images/content/arrow_back.svg" alt="">
-              <router-link :to="'/home2'">
-                <img class="arrow-forward" src="/images/content/arrow_forward.svg" alt="">
+              <router-link :to="'/'">
+                <img class="arrow-back" src="/images/content/arrow_back.svg" alt="">
               </router-link>
+              <img class="arrow-forward" src="/images/content/arrow_forward.svg" alt="">
               <div @click="showModalIteam" style="cursor: pointer">
                 <img class="extension" src="/images/content/extension.svg" alt="">
               </div>
