@@ -36,7 +36,7 @@
           <div class="menu-nav-box">
             <div class="menu-nav-title">
               <ul class="breadcrumb">
-                <li><a href="#">Меню11111</a></li>
+                <li><a href="#">Меню</a></li>
                 <li><a href="#">ОЕЕ</a></li>
                 <li><a href="#">Онлайн ОЕЕ</a></li>
                 <li><a href="#">Станок 1</a></li>
@@ -45,7 +45,9 @@
             <div class="menu-nav-btn">
               <img class="arrow-back" src="/images/content/arrow_back.svg" alt="">
               <img class="arrow-forward" src="/images/content/arrow_forward.svg" alt="">
-              <img class="extension" src="/images/content/extension.svg" alt="">
+              <div @click="showModalIteam" style="cursor: pointer">
+                <img class="extension" src="/images/content/extension.svg" alt="">
+              </div>
             </div>
           </div>
         </div>
@@ -180,7 +182,7 @@
         </template>
       </div>
     </footer>
-
+    <modalIteam v-if="modalIteamVisible" @closeModal="closeModaliteam"></modalIteam>
   </div>
 </template>
 
@@ -188,7 +190,8 @@
 import axios from 'axios'
 import CartStatic from './../components/CartStatic'
 import CartDinamic from "./../components/CartDinamic"
-import CartTime from "../components/CartTime";
+import CartTime from "../components/CartTime"
+import modalIteam from "../components/modalIteam"
 
 export default {
 
@@ -196,7 +199,8 @@ export default {
   components: {
     CartStatic: CartStatic,
     CartDinamic: CartDinamic,
-    CartTime: CartTime
+    CartTime: CartTime,
+    modalIteam: modalIteam
   },
 
   data() {
@@ -225,6 +229,7 @@ export default {
         timeOff: 0,
         timeWork: 0,
       },
+      modalIteamVisible: false,
     }
   },
   watch: {
@@ -243,6 +248,13 @@ export default {
     }
   },
   methods: {
+
+    showModalIteam() {
+      this.modalIteamVisible = true;
+    },
+    closeModaliteam() {
+      this.modalIteamVisible = false;
+    },
 
     filter(filter) {
       this.getDataMachine(filter);

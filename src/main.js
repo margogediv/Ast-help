@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import 'material-design-icons-iconfont'
 
 import './css/app.scss'
 // require('vue2-animate/dist/vue2-animate.min.css')
